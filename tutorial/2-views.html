@@ -24,53 +24,41 @@ var Comment = Backbone.Model.extend({
   /* The argument passed to `initialize` is what the model is instantiated with:
    * in `new Comment(message)`, message will be passed to `initialize`. */
   defaults: {
-    voteCount: 0
+    votes: 0
   },
   initialize: function(message) {
     /* Set the initial values for `votes` to 0 and `message` to the message.
      * Remember to use setters when working with attributes! */
-     this.on("change:voteCount", function(e) {
-      console.log(e);
-      console.log(e.changed.voteCount);
-     });
+     // this.on("change:votes", function(e) {
+     // });
+     this.set({'message':message});
   },
   votes: function() {
     /* Return the votes attribute on this model.
      * Remember to use a getter when working with attributes! */
-     return this.get('voteCount');
+     return this.get('votes');
   },
   upvote: function(){
     // Set the `votes` attribute to the current vote count plus one.
-    // var v = this.get('voteCount');
-    this.set({"voteCount":this.get('voteCount') + 1});
+    // var v = this.get('votes');
+    this.set({"votes":this.get('votes') + 1});
       
   },
   // Add a downvote function; don't forget the comma above.
   downvote: function() {
-     this.set({"voteCount":this.get('voteCount') - 1});
+     this.set({"votes":this.get('votes') - 1});
   }
 });
 
-var myComment = new Comment({
-  message: 'an initialized message',
-});
-
-// var myComment = new Comment('test');
-
-myComment.upvote();
-myComment.upvote();
-myComment.upvote();
-myComment.upvote();
-
-myComment.downvote();
+var myComment = new Comment('an initialized message');
 
 
-// myComment.on('change:this.defaults.voteCount', function(e) {
-//     console.log(e);
-//     console.log(e.changed.voteCount);
-//    });
+// myComment.upvote();
+// myComment.upvote();
+// myComment.upvote();
+// myComment.upvote();
 
-console.log(myComment.votes());
+// myComment.downvote();
 
 /* - Backbone VIEW ------------------------------------------------------------
  * Now that we have a model, we'll want a view to display it.
@@ -172,15 +160,15 @@ var commentView = new CommentView({ model: comment });
  */
 
 // Append the view to the page. This is why we returned html from `render`:
-// $('body').append(commentView.render());
-
+$('body').append(commentView.render());
+    
 /* The number of votes should be 0.
  * We set that as the initial default value in the comment model.
  *
  * Let's change it and see our eventlistener in action.
  * Uncomment the line below and reload the page,
  * and it should say '1' to the left of the comment. */
-// comment.upvote();
+comment.upvote();
 
 /* play with this in your console as well.
  * You can modify the comment object in the same way we just did:

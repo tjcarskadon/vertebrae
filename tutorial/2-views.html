@@ -30,12 +30,29 @@ var Comment = Backbone.Model.extend({
   votes: function() {
     /* Return the votes attribute on this model.
      * Remember to use a getter when working with attributes! */
+     return voteCount;
   },
-  upvote: function(){
+  upvote: function(voteCount){
     // Set the `votes` attribute to the current vote count plus one.
-  }
+    voteCount++;
+      
+  },
   // Add a downvote function; don't forget the comma above.
+  downvote: function(voteCount) {
+     voteCount--;
+  }
 });
+
+var myComment = new Comment({
+  message: 'an initialized message',
+  var voteCount = 0
+});
+
+// var myComment = new Comment('test');
+var votes = myComment.votes();
+myComment.upvote(votes);
+
+console.log(myComment.votes());
 
 /* - Backbone VIEW ------------------------------------------------------------
  * Now that we have a model, we'll want a view to display it.

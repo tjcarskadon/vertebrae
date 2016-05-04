@@ -84,10 +84,11 @@ myTweet.on('change',
     console.log(e);
 
     // Write code to log the changed attribute:
-    // console.log(YOUR CODE HERE);
+    console.log(e.changed.message);
   }
 );
 
+myTweet.set('message','An awesome new tweet!');
 /* Backbone works through getters/setters. If you change something on
  * your model as if it were a plain old javascript object,
  * Backbone will not know to fire the change event. */

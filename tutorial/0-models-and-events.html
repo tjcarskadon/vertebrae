@@ -88,7 +88,6 @@ myTweet.on('change',
   }
 );
 
-myTweet.set('message','An awesome new tweet!');
 /* Backbone works through getters/setters. If you change something on
  * your model as if it were a plain old javascript object,
  * Backbone will not know to fire the change event. */
@@ -99,6 +98,7 @@ myTweet.set('message','An awesome new tweet!');
  * and write a one-liner that will make our `change` listener fire: */
 
 // myTweetYOUR CODE HERE;
+myTweet.set('message','An awesome new tweet!');
 
 /* Once you have the `change` event firing, move on to rendering! */
   </script>

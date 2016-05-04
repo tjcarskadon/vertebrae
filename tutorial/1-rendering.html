@@ -49,15 +49,14 @@ var renderSomethingOnThePage = function(message) {
 };
 
 // Let's try it out:
-renderSomethingOnThePage(
-  'This is an example of how to use our rendering method.');
+renderSomethingOnThePage('This is an example of how to use our rendering method.');
 
 /* Here are a few more examples. Every call to our rendering function (above)
  * will draw something to the page using the template defined in that function:
  */
 
-// renderSomethingOnThePage('Each additional message you give this function...');
-// renderSomethingOnThePage('...will draw a new message on the page!');
+renderSomethingOnThePage('Each additional message you give this function...');
+renderSomethingOnThePage('...will draw a new message on the page!');
 
 /* Let's revisit what we have learned from the last exercise.
  * We are working with a different application this time - we are going to be
@@ -101,7 +100,9 @@ var Message = Backbone.Model.extend({
      * Putting it into the initialize function let's us be sure that
      * all models that are created will have event listeners on them.
      */
-    this.on(YOUR CODE HERE);
+    this.on("change:message",function(e){
+      renderSomethingOnThePage(e.changed.message);
+    });
     /* It is your turn to write the event handler.
      *
      * Make an event listener that will listen for a `change` in this model's
@@ -134,7 +135,11 @@ var Message = Backbone.Model.extend({
  *
  * Try it yourself, then check out the answer at the bottom of this script.
  */
+var myMessage = new Message();
 
+myMessage.set('message','mic checka one two!');
+
+myMessage.alertThisMessage();
 
 // Let's try it out: 'instantiate' an instance of the class defined above:
 var myNewMessage = new Message();

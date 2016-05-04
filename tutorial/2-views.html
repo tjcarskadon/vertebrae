@@ -23,34 +23,52 @@
 var Comment = Backbone.Model.extend({
   /* The argument passed to `initialize` is what the model is instantiated with:
    * in `new Comment(message)`, message will be passed to `initialize`. */
+  defaults: {
+    voteCount: 0
+  },
   initialize: function(message) {
     /* Set the initial values for `votes` to 0 and `message` to the message.
      * Remember to use setters when working with attributes! */
+     this.on("change:voteCount", function(e) {
+      console.log(e);
+      console.log(e.changed.voteCount);
+     });
   },
   votes: function() {
     /* Return the votes attribute on this model.
      * Remember to use a getter when working with attributes! */
-     return voteCount;
+     return this.get('voteCount');
   },
-  upvote: function(voteCount){
+  upvote: function(){
     // Set the `votes` attribute to the current vote count plus one.
-    voteCount++;
+    // var v = this.get('voteCount');
+    this.set({"voteCount":this.get('voteCount') + 1});
       
   },
   // Add a downvote function; don't forget the comma above.
-  downvote: function(voteCount) {
-     voteCount--;
+  downvote: function() {
+     this.set({"voteCount":this.get('voteCount') - 1});
   }
 });
 
 var myComment = new Comment({
   message: 'an initialized message',
-  var voteCount = 0
 });
 
 // var myComment = new Comment('test');
-var votes = myComment.votes();
-myComment.upvote(votes);
+
+myComment.upvote();
+myComment.upvote();
+myComment.upvote();
+myComment.upvote();
+
+myComment.downvote();
+
+
+// myComment.on('change:this.defaults.voteCount', function(e) {
+//     console.log(e);
+//     console.log(e.changed.voteCount);
+//    });
 
 console.log(myComment.votes());
 
